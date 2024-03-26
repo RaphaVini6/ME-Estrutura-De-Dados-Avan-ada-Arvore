@@ -1,0 +1,41 @@
+Ele implementa as funcionalidades mencionadas, permitindo:
+
+a) Obter o nível de um determinado nó através do método nivelNo(int valor).
+b) Calcular o nível da árvore através do método profundidadeArvore().
+c) Determinar a profundidade de cada nó com o método profundidadeNo(int valor).
+d) Calcular a profundidade da árvore utilizando o mesmo método mencionado no item (b).
+e) Calcular a altura de cada nó com o método alturaNo(int valor).
+f) Calcular a altura da árvore utilizando o método alturaNoRecursivo(No no) e calcularAltura(No no, int valor).
+g) Imprimir a árvore com identação utilizando o método imprimirComIdentacao().
+
+Portanto, todas as funcionalidades foram implementadas conforme especificado.
+
+
+
+
+Vou explicar detalhadamente o código fornecido:
+
+1-Classe main:
+
+*Esta classe contém apenas o método main, que é o ponto de entrada do programa. Dentro do método main, uma instância da classe ArvoreBinaria é criada, seguida pela criação de uma instância da classe Menu passando a árvore binária como argumento. Em seguida, o método exibirMenu() da instância de Menu é chamado para iniciar a interação com o usuário.
+
+2-Classe Menu:
+
+*Esta classe é responsável por exibir um menu interativo para o usuário e interagir com a árvore binária com base nas escolhas do usuário.
+*Ela possui um atributo arvoreBinaria do tipo ArvoreBinaria para realizar operações na árvore binária.
+*O método exibirMenu() é responsável por exibir o menu, receber a entrada do usuário e executar a operação correspondente. Ele entra em um loop até que o usuário escolha sair (opção 99).
+*Cada opção do menu corresponde a uma operação na árvore binária, como adicionar um elemento, ver os elementos em diferentes ordens, obter o nível de um nó, profundidade da árvore, etc.
+
+3-Classe ArvoreBinaria:
+
+*Esta classe representa uma árvore binária.
+*Ela possui um atributo raiz que é um objeto da classe No, representando o nó raiz da árvore.
+*Os métodos públicos dessa classe permitem operações na árvore, como adicionar um elemento, percorrer a árvore em diferentes ordens (pré-ordem, pós-ordem, em ordem), obter o nível e a profundidade de um nó, calcular a profundidade da árvore, a altura de um nó, e imprimir a árvore com identação.
+*A classe No é uma classe interna privada que representa um nó da árvore binária. Cada nó possui um valor inteiro, uma referência para o nó filho esquerdo e uma referência para o nó filho direito.
+
+Em resumo, o código fornece uma implementação de uma árvore binária juntamente com um menu interativo que permite ao usuário realizar várias operações na árvore, como adicionar elementos, percorrer a árvore em diferentes ordens e obter informações sobre os nós e a estrutura da árvore.
+
+
+
+
+
