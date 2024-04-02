@@ -7,33 +7,58 @@ d) Calcular a profundidade da árvore utilizando o mesmo método mencionado no i
 e) Calcular a altura de cada nó com o método alturaNo(int valor).
 f) Calcular a altura da árvore utilizando o método alturaNoRecursivo(No no) e calcularAltura(No no, int valor).
 g) Imprimir a árvore com identação utilizando o método imprimirComIdentacao().
+h) Imprima a sequencia de nós no percurso LRN
+i)  Imprima a sequencia de nós no percurso NLR
+j) Imprima a sequencia de nós no percurso LNR
+
 
 Portanto, todas as funcionalidades foram implementadas conforme especificado.
 
+Esse código é uma implementação de uma árvore binária em Java, que permite ao usuário interagir com a árvore através de um menu apresentado em uma caixa de diálogo do JOptionPane.
 
+Vou explicar o código linha por linha:
 
+import javax.swing.JOptionPane;: Esta linha importa a classe JOptionPane do pacote javax.swing, que é utilizada para exibir caixas de diálogo para interação com o usuário.
 
-Vou explicar detalhadamente o código fornecido:
+public class main { ... }: Aqui é declarada a classe principal do programa, chamada main. Ela contém o método main, que é o ponto de entrada do programa Java.
 
-1-Classe main:
+public static void main(String[] args) { ... }: Este é o método principal main, que é executado quando o programa é iniciado. Ele cria uma instância da classe BinaryTree e uma instância da classe Menu, passando a árvore binária como parâmetro. Em seguida, chama o método displayMenu() para mostrar o menu ao usuário.
 
-*Esta classe contém apenas o método main, que é o ponto de entrada do programa. Dentro do método main, uma instância da classe ArvoreBinaria é criada, seguida pela criação de uma instância da classe Menu passando a árvore binária como argumento. Em seguida, o método exibirMenu() da instância de Menu é chamado para iniciar a interação com o usuário.
+class Menu { ... }: Esta é a definição da classe Menu, que é responsável por exibir o menu e interagir com o usuário.
 
-2-Classe Menu:
+private BinaryTree binaryTree;: Este é um atributo da classe Menu que armazena uma referência para a árvore binária.
 
-*Esta classe é responsável por exibir um menu interativo para o usuário e interagir com a árvore binária com base nas escolhas do usuário.
-*Ela possui um atributo arvoreBinaria do tipo ArvoreBinaria para realizar operações na árvore binária.
-*O método exibirMenu() é responsável por exibir o menu, receber a entrada do usuário e executar a operação correspondente. Ele entra em um loop até que o usuário escolha sair (opção 99).
-*Cada opção do menu corresponde a uma operação na árvore binária, como adicionar um elemento, ver os elementos em diferentes ordens, obter o nível de um nó, profundidade da árvore, etc.
+private String menuText = "...";: Este é um atributo da classe Menu que contém o texto do menu.
 
-3-Classe ArvoreBinaria:
+public Menu(BinaryTree binaryTree) { ... }: Este é o construtor da classe Menu, que recebe uma instância de BinaryTree como parâmetro e a armazena no atributo binaryTree.
 
-*Esta classe representa uma árvore binária.
-*Ela possui um atributo raiz que é um objeto da classe No, representando o nó raiz da árvore.
-*Os métodos públicos dessa classe permitem operações na árvore, como adicionar um elemento, percorrer a árvore em diferentes ordens (pré-ordem, pós-ordem, em ordem), obter o nível e a profundidade de um nó, calcular a profundidade da árvore, a altura de um nó, e imprimir a árvore com identação.
-*A classe No é uma classe interna privada que representa um nó da árvore binária. Cada nó possui um valor inteiro, uma referência para o nó filho esquerdo e uma referência para o nó filho direito.
+public void displayMenu() { ... }: Este método exibe o menu ao usuário e processa as escolhas feitas pelo usuário.
 
+O restante do código dentro do método displayMenu() consiste em um loop que continua pedindo ao usuário para escolher uma opção do menu até que ele escolha a opção "99 - Sair". Dependendo da opção escolhida, métodos diferentes da classe BinaryTree são chamados para realizar operações na árvore binária.
+
+class BinaryTree { ... }: Esta é a definição da classe BinaryTree, que representa a árvore binária. Ela contém métodos para adicionar elementos, percorrer a árvore em diferentes ordens, calcular propriedades da árvore (como profundidade e altura) e imprimir a árvore com identação.
+
+private static class Node { ... }: Esta é a definição de uma classe interna Node, que representa um nó na árvore binária. Cada nó tem um valor inteiro e referências para os nós filho esquerdo e direito.
+
+Classe main:
+Esta classe é o ponto de entrada do programa, contendo apenas o método main.
+Dentro do método main, uma instância da classe BinaryTree é criada para representar a árvore binária.
+Em seguida, é criada uma instância da classe Menu, passando a árvore binária como argumento.
+O método displayMenu() da instância de Menu é então chamado para iniciar a interação com o usuário.
+Classe Menu:
+Responsável por exibir um menu interativo para o usuário e interagir com a árvore binária com base nas escolhas do usuário.
+Possui um atributo binaryTree do tipo BinaryTree para realizar operações na árvore binária.
+O método displayMenu() exibe o menu, recebe a entrada do usuário e executa a operação correspondente. Ele continua em um loop até que o usuário escolha sair (opção 99).
+Cada opção do menu corresponde a uma operação na árvore binária, como adicionar um elemento, ver os elementos em diferentes ordens, obter o nível de um nó, profundidade da árvore, etc.
+Classe BinaryTree:
+Representa uma árvore binária.
+Possui um atributo root que é um objeto da classe Node, representando o nó raiz da árvore.
+Os métodos públicos permitem operações na árvore, como adicionar um elemento, percorrer a árvore em diferentes ordens (pré-ordem, pós-ordem, em ordem), obter o nível e a profundidade de um nó, calcular a profundidade da árvore, a altura de um nó e imprimir a árvore com identação.
+A classe Node é uma classe interna privada que representa um nó da árvore binária. Cada nó possui um valor inteiro, uma referência para o nó filho esquerdo e uma referência para o nó filho direito.
 Em resumo, o código fornece uma implementação de uma árvore binária juntamente com um menu interativo que permite ao usuário realizar várias operações na árvore, como adicionar elementos, percorrer a árvore em diferentes ordens e obter informações sobre os nós e a estrutura da árvore.
+
+
+
 
 
 
