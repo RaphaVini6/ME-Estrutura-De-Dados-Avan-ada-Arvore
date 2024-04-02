@@ -38,14 +38,18 @@ class Menu {
                 case 1:
                     int number = Integer.parseInt(JOptionPane.showInputDialog("Digite um número: "));
                     binaryTree.addElement(number);
+                    System.out.println("Elemento adicionado com sucesso.");
                     break;
                 case 2:
+                    System.out.println("Elementos na Pré-Ordem: ");
                     binaryTree.preOrderTraversal();
                     break;
                 case 3:
+                    System.out.println("Elementos na Pós-Ordem: ");
                     binaryTree.postOrderTraversal();
                     break;
                 case 4:
+                    System.out.println("Elementos em Ordem: ");
                     binaryTree.inOrderTraversal();
                     break;
                 case 5:
@@ -77,18 +81,24 @@ class Menu {
                         System.out.println("Altura do Nó: " + nodeHeight);
                     break;
                 case 9:
+                    System.out.println("Árvore com Identação: ");
                     binaryTree.printWithIndentation();
                     break;
                 case 10:
+                    System.out.println("Elementos no Percurso LRN: ");
                     binaryTree.lrnTraversal();
                     break;
                 case 11:
+                    System.out.println("Elementos no Percurso NLR: ");
                     binaryTree.nlrTraversal();
                     break;
                 case 12:
+                    System.out.println("Elementos no Percurso LNR: ");
                     binaryTree.lnrTraversal();
                     break;
             }
+            // Após executar uma operação, limpa o buffer do console
+            System.out.println();
         }
     }
 }
@@ -252,7 +262,6 @@ class BinaryTree {
             printWithIndentationRecursive(node.left, level + 1);
         }
     }
-
     public void lrnTraversal() {
         lrnRecursive(root);
     }
