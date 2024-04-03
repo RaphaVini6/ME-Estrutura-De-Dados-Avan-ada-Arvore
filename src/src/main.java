@@ -1,104 +1,106 @@
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class main {
 
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
-        Menu menu = new Menu(binaryTree);
-        menu.displayMenu();
+        SwingUtilities.invokeLater(() -> {
+            MenuFrame menuFrame = new MenuFrame(binaryTree);
+            menuFrame.setVisible(true);
+        });
     }
 }
 
-class Menu {
-    private BinaryTree binaryTree;
-    private String menuText = "ÁRVORE BINÁRIA\n" +
-            "1 - Adicionar Elemento\n" +
-            "2 - Ver Elementos na Pré-Ordem\n" +
-            "3 - Ver Elementos na Pós-Ordem\n" +
-            "4 - Ver Elementos em Ordem\n" +
-            "5 - Ver Nível de um Nó\n" +
-            "6 - Ver Profundidade de um Nó\n" +
-            "7 - Ver Profundidade da Árvore\n" +
-            "8 - Ver Altura de um Nó\n" +
-            "9 - Imprimir Árvore com Identação\n" +
-            "10 - Ver Elementos no Percurso LRN\n" +
-            "11 - Ver Elementos no Percurso NLR\n" +
-            "12 - Ver Elementos no Percurso LNR\n" +
-            "99 - Sair";
+class MenuFrame extends JFrame {
+    private final BinaryTree binaryTree;
 
-    public Menu(BinaryTree binaryTree) {
+    public MenuFrame(BinaryTree binaryTree) {
         this.binaryTree = binaryTree;
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("ÁRVORE BINÁRIA");
+        setSize(200, 100);
+        setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        String[] options = {
+                "Adicionar Elemento",
+                "Ver Nível da Árvore",
+                "Ver Nível de um Nó Específico",
+                "Ver Profundidade de Cada Nó",
+                "Ver Altura de Cada Nó",
+                "Ver Altura da Árvore",
+                "Imprimir Árvore com Identação",
+                "Ver Elementos no Percurso LRN",
+                "Ver Elementos no Percurso NLR",
+                "Ver Elementos no Percurso LNR",
+                "Ver Profundidade da Árvore", // Nova opção
+                "Sair"
+        };
+
+        JComboBox<String> comboBox = new JComboBox<>(options);
+        panel.add(comboBox);
+
+        JButton button = new JButton("Executar");
+        button.addActionListener(e -> {
+            String selectedOption = (String) comboBox.getSelectedItem();
+            executeOption(selectedOption);
+        });
+        panel.add(button);
+
+        add(panel);
     }
 
-    public void displayMenu() {
-        int option = 0;
-        while (option != 99) {
-            option = Integer.parseInt(JOptionPane.showInputDialog(menuText));
-            switch (option) {
-                case 1:
-                    int number = Integer.parseInt(JOptionPane.showInputDialog("Digite um número: "));
-                    binaryTree.addElement(number);
-                    System.out.println("Elemento adicionado com sucesso.");
-                    break;
-                case 2:
-                    System.out.println("Elementos na Pré-Ordem: ");
-                    binaryTree.preOrderTraversal();
-                    break;
-                case 3:
-                    System.out.println("Elementos na Pós-Ordem: ");
-                    binaryTree.postOrderTraversal();
-                    break;
-                case 4:
-                    System.out.println("Elementos em Ordem: ");
-                    binaryTree.inOrderTraversal();
-                    break;
-                case 5:
-                    int value = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int level = binaryTree.getNodeLevel(value);
-                    if (level == -1)
-                        System.out.println("Nó não encontrado na árvore.");
-                    else
-                        System.out.println("Nível do Nó: " + level);
-                    break;
-                case 6:
-                    value = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int nodeDepth = binaryTree.getNodeDepth(value);
-                    if (nodeDepth == -1)
-                        System.out.println("Nó não encontrado na árvore.");
-                    else
-                        System.out.println("Profundidade do Nó: " + nodeDepth);
-                    break;
-                case 7:
-                    int treeDepth = binaryTree.treeDepth();
-                    System.out.println("Profundidade da Árvore: " + treeDepth);
-                    break;
-                case 8:
-                    value = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do Nó: "));
-                    int nodeHeight = binaryTree.getNodeHeight(value);
-                    if (nodeHeight == -1)
-                        System.out.println("Nó não encontrado na árvore.");
-                    else
-                        System.out.println("Altura do Nó: " + nodeHeight);
-                    break;
-                case 9:
-                    System.out.println("Árvore com Identação: ");
-                    binaryTree.printWithIndentation();
-                    break;
-                case 10:
-                    System.out.println("Elementos no Percurso LRN: ");
-                    binaryTree.lrnTraversal();
-                    break;
-                case 11:
-                    System.out.println("Elementos no Percurso NLR: ");
-                    binaryTree.nlrTraversal();
-                    break;
-                case 12:
-                    System.out.println("Elementos no Percurso LNR: ");
-                    binaryTree.lnrTraversal();
-                    break;
-            }
-            // Após executar uma operação, limpa o buffer do console
-            System.out.println();
+    private void executeOption(String option) {
+        switch (option) {
+            case "Adicionar Elemento":
+                int number = Integer.parseInt(JOptionPane.showInputDialog("Digite um número: "));
+                binaryTree.addElement(number);
+                JOptionPane.showMessageDialog(this, "Elemento adicionado com sucesso.");
+                break;
+            case "Ver Nível da Árvore":
+                int treeLevel = binaryTree.treeLevel();
+                JOptionPane.showMessageDialog(this, "Nível da Árvore: " + treeLevel);
+                break;
+            case "Ver Nível de um Nó Específico":
+                int nodeValue = Integer.parseInt(JOptionPane.showInputDialog("Digite o valor do nó: "));
+                int nodeLevel = binaryTree.getNodeLevel(nodeValue);
+                if (nodeLevel != 0) {
+                    JOptionPane.showMessageDialog(this, "Nível do Nó " + nodeValue + ": " + nodeLevel);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Nó não encontrado na árvore.");
+                }
+                break;
+            case "Ver Profundidade de Cada Nó":
+                JOptionPane.showMessageDialog(this, "Profundidade de cada nó:\n" + binaryTree.nodeDepths());
+                break;
+            case "Ver Altura de Cada Nó":
+                JOptionPane.showMessageDialog(this, "Altura de cada nó:\n" + binaryTree.nodeHeights());
+                break;
+            case "Ver Altura da Árvore":
+                int treeHeight = binaryTree.treeHeight();
+                JOptionPane.showMessageDialog(this, "Altura da Árvore: " + treeHeight);
+                break;
+            case "Imprimir Árvore com Identação":
+                binaryTree.printWithIndentation();
+                break;
+            case "Ver Elementos no Percurso LRN":
+                JOptionPane.showMessageDialog(this, "Elementos no Percurso LRN:\n" + binaryTree.lrnTraversalForDialog());
+                break;
+            case "Ver Elementos no Percurso NLR":
+                JOptionPane.showMessageDialog(this, "Elementos no Percurso NLR:\n" + binaryTree.nlrTraversalForDialog());
+                break;
+            case "Ver Elementos no Percurso LNR":
+                JOptionPane.showMessageDialog(this, "Elementos no Percurso LNR:\n" + binaryTree.lnrTraversalForDialog());
+                break;
+            case "Ver Profundidade da Árvore":
+                int treeDepth = binaryTree.treeDepth();
+                JOptionPane.showMessageDialog(this, "Profundidade da Árvore: " + treeDepth);
+                break;
+            case "Sair":
+                System.exit(0);
+                break;
         }
     }
 }
@@ -128,124 +130,60 @@ class BinaryTree {
         return node;
     }
 
-    public void preOrderTraversal() {
-        preOrderRecursive(root);
+    public int treeLevel() {
+        return calculateTreeLevel(root);
     }
 
-    private void preOrderRecursive(Node node) {
-        if (node != null) {
-            System.out.print(node.value + " ");
-            preOrderRecursive(node.left);
-            preOrderRecursive(node.right);
-        }
-    }
-
-    public void postOrderTraversal() {
-        postOrderRecursive(root);
-    }
-
-    private void postOrderRecursive(Node node) {
-        if (node != null) {
-            postOrderRecursive(node.left);
-            postOrderRecursive(node.right);
-            System.out.print(node.value + " ");
-        }
-    }
-
-    public void inOrderTraversal() {
-        inOrderRecursive(root);
-    }
-
-    private void inOrderRecursive(Node node) {
-        if (node != null) {
-            inOrderRecursive(node.left);
-            System.out.print(node.value + " ");
-            inOrderRecursive(node.right);
-        }
-    }
-
-    public int getNodeLevel(int value) {
-        return getNodeLevelRecursive(root, value, 1);
-    }
-
-    private int getNodeLevelRecursive(Node node, int value, int currentLevel) {
+    private int calculateTreeLevel(Node node) {
         if (node == null)
-            return -1;
-
-        if (node.value == value)
-            return currentLevel;
-
-        int leftLevel = getNodeLevelRecursive(node.left, value, currentLevel + 1);
-        if (leftLevel != -1)
-            return leftLevel;
-
-        int rightLevel = getNodeLevelRecursive(node.right, value, currentLevel + 1);
-        return rightLevel;
-    }
-
-    public int getNodeDepth(int value) {
-        return getNodeDepthRecursive(root, value);
-    }
-
-    private int getNodeDepthRecursive(Node node, int value) {
-        if (node == null)
-            return -1;
-
-        if (node.value == value)
             return 0;
 
-        int leftDepth = getNodeDepthRecursive(node.left, value);
-        if (leftDepth != -1)
-            return leftDepth + 1;
+        int leftLevel = calculateTreeLevel(node.left);
+        int rightLevel = calculateTreeLevel(node.right);
 
-        int rightDepth = getNodeDepthRecursive(node.right, value);
-        if (rightDepth != -1)
-            return rightDepth + 1;
-
-        return -1; // Não encontrado
+        return Math.max(leftLevel, rightLevel) + 1;
     }
 
-    public int treeDepth() {
-        return calculateTreeDepth(root);
+    public String nodeDepths() {
+        return calculateNodeDepths(root, 0);
     }
 
-    private int calculateTreeDepth(Node node) {
+    private String calculateNodeDepths(Node node, int depth) {
+        StringBuilder sb = new StringBuilder();
+        if (node != null) {
+            sb.append(node.value).append(": ").append(depth).append("\n");
+            sb.append(calculateNodeDepths(node.left, depth + 1));
+            sb.append(calculateNodeDepths(node.right, depth + 1));
+        }
+        return sb.toString();
+    }
+
+    public String nodeHeights() {
+        return calculateNodeHeights(root);
+    }
+
+    private String calculateNodeHeights(Node node) {
+        StringBuilder sb = new StringBuilder();
+        if (node != null) {
+            sb.append(node.value).append(": ").append(calculateHeight(node)).append("\n");
+            sb.append(calculateNodeHeights(node.left));
+            sb.append(calculateNodeHeights(node.right));
+        }
+        return sb.toString();
+    }
+
+    private int calculateHeight(Node node) {
         if (node == null)
             return -1;
 
-        int leftDepth = calculateTreeDepth(node.left);
-        int rightDepth = calculateTreeDepth(node.right);
-
-        return Math.max(leftDepth, rightDepth) + 1;
-    }
-
-    public int getNodeHeight(int value) {
-        return calculateHeight(root, value);
-    }
-
-    private int calculateHeight(Node node, int value) {
-        if (node == null)
-            return -1;
-
-        if (node.value == value)
-            return heightRecursive(node);
-
-        int leftHeight = calculateHeight(node.left, value);
-        if (leftHeight != -1)
-            return leftHeight;
-
-        int rightHeight = calculateHeight(node.right, value);
-        return rightHeight;
-    }
-
-    private int heightRecursive(Node node) {
-        if (node == null)
-            return -1;
-
-        int leftHeight = heightRecursive(node.left);
-        int rightHeight = heightRecursive(node.right);
+        int leftHeight = calculateHeight(node.left);
+        int rightHeight = calculateHeight(node.right);
 
         return Math.max(leftHeight, rightHeight) + 1;
+    }
+
+    public int treeHeight() {
+        return calculateHeight(root);
     }
 
     public void printWithIndentation() {
@@ -262,43 +200,85 @@ class BinaryTree {
             printWithIndentationRecursive(node.left, level + 1);
         }
     }
-    public void lrnTraversal() {
-        lrnRecursive(root);
+
+    public String lrnTraversalForDialog() {
+        return lrnRecursiveForDialog(root);
     }
 
-    private void lrnRecursive(Node node) {
+    private String lrnRecursiveForDialog(Node node) {
+        StringBuilder sb = new StringBuilder();
         if (node != null) {
-            lrnRecursive(node.left);
-            lrnRecursive(node.right);
-            System.out.print(node.value + " ");
+            sb.append(lrnRecursiveForDialog(node.left));
+            sb.append(lrnRecursiveForDialog(node.right));
+            sb.append(node.value).append(" ");
         }
+        return sb.toString();
     }
 
-    public void nlrTraversal() {
-        nlrRecursive(root);
+    public String nlrTraversalForDialog() {
+        return nlrRecursiveForDialog(root);
     }
 
-    private void nlrRecursive(Node node) {
+    private String nlrRecursiveForDialog(Node node) {
+        StringBuilder sb = new StringBuilder();
         if (node != null) {
-            System.out.print(node.value + " ");
-            nlrRecursive(node.left);
-            nlrRecursive(node.right);
+            sb.append(node.value).append(" ");
+            sb.append(nlrRecursiveForDialog(node.left));
+            sb.append(nlrRecursiveForDialog(node.right));
         }
+        return sb.toString();
     }
 
-    public void lnrTraversal() {
-        lnrRecursive(root);
+    public String lnrTraversalForDialog() {
+        return lnrRecursiveForDialog(root);
     }
 
-    private void lnrRecursive(Node node) {
+    private String lnrRecursiveForDialog(Node node) {
+        StringBuilder sb = new StringBuilder();
         if (node != null) {
-            lnrRecursive(node.left);
-            System.out.print(node.value + " ");
-            lnrRecursive(node.right);
+            sb.append(lnrRecursiveForDialog(node.left));
+            sb.append(node.value).append(" ");
+            sb.append(lnrRecursiveForDialog(node.right));
         }
+        return sb.toString();
     }
 
-    private static class Node {
+    // Método para obter o nível de um nó específico na árvore
+    public int getNodeLevel(int value) {
+        return getNodeLevelRecursive(root, value, 1);
+    }
+
+    private int getNodeLevelRecursive(Node node, int value, int level) {
+        if (node == null)
+            return 0;
+        if (node.value == value)
+            return level;
+
+        // Procura em ambos os subárvores
+        int downLevel = getNodeLevelRecursive(node.left, value, level + 1);
+        if (downLevel != 0)
+            return downLevel;
+
+        downLevel = getNodeLevelRecursive(node.right, value, level + 1);
+        return downLevel;
+    }
+
+    // Método para calcular a profundidade da árvore
+    public int treeDepth() {
+        return calculateTreeDepth(root);
+    }
+
+    private int calculateTreeDepth(Node node) {
+        if (node == null)
+            return 0;
+
+        int leftDepth = calculateTreeDepth(node.left);
+        int rightDepth = calculateTreeDepth(node.right);
+
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    class Node {
         int value;
         Node left;
         Node right;
@@ -310,4 +290,3 @@ class BinaryTree {
         }
     }
 }
-
