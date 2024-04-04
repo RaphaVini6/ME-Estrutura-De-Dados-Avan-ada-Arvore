@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-public class main {
+public class Main {
 
     public static void main(String[] args) {
         BinaryTree binaryTree = new BinaryTree();
@@ -24,32 +24,38 @@ class MenuFrame extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
+        JComboBox<String> comboBox = createComboBox();
+        panel.add(comboBox);
+
+        JButton button = new JButton("Executar");
+        button.addActionListener(e -> {
+            String selectedOption = (String) comboBox.getSelectedItem();
+            if (selectedOption != null) {
+                executeOption(selectedOption);
+            }
+        });
+        panel.add(button);
+
+        add(panel);
+    }
+
+    private JComboBox<String> createComboBox() {
         String[] options = {
                 "Adicionar Elemento",
                 "Ver Nível da Árvore",
                 "Ver Nível de um Nó Específico",
                 "Ver Profundidade de Cada Nó",
+                "Ver Profundidade da Árvore",
                 "Ver Altura de Cada Nó",
                 "Ver Altura da Árvore",
                 "Imprimir Árvore com Identação",
                 "Ver Elementos no Percurso LRN",
                 "Ver Elementos no Percurso NLR",
                 "Ver Elementos no Percurso LNR",
-                "Ver Profundidade da Árvore",
                 "Sair"
         };
 
-        JComboBox<String> comboBox = new JComboBox<>(options);
-        panel.add(comboBox);
-
-        JButton button = new JButton("Executar");
-        button.addActionListener(e -> {
-            String selectedOption = (String) comboBox.getSelectedItem();
-            executeOption(selectedOption);
-        });
-        panel.add(button);
-
-        add(panel);
+        return new JComboBox<>(options);
     }
 
     private void executeOption(String option) {
@@ -274,15 +280,16 @@ class BinaryTree {
         return Math.max(leftDepth, rightDepth) + 1;
     }
 
-    class Node {
-        int value;
-        Node left;
-        Node right;
+}
 
-        public Node(int value) {
-            this.value = value;
-            this.left = null;
-            this.right = null;
-        }
+class Node {
+    int value;
+    Node left;
+    Node right;
+
+    public Node(int value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
     }
 }
