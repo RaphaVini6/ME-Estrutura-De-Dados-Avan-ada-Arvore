@@ -35,7 +35,7 @@ class MenuFrame extends JFrame {
                 "Ver Elementos no Percurso LRN",
                 "Ver Elementos no Percurso NLR",
                 "Ver Elementos no Percurso LNR",
-                "Ver Profundidade da Árvore", // Nova opção
+                "Ver Profundidade da Árvore",
                 "Sair"
         };
 
@@ -243,7 +243,6 @@ class BinaryTree {
         return sb.toString();
     }
 
-    // Método para obter o nível de um nó específico na árvore
     public int getNodeLevel(int value) {
         return getNodeLevelRecursive(root, value, 1);
     }
@@ -254,7 +253,6 @@ class BinaryTree {
         if (node.value == value)
             return level;
 
-        // Procura em ambos os subárvores
         int downLevel = getNodeLevelRecursive(node.left, value, level + 1);
         if (downLevel != 0)
             return downLevel;
@@ -262,8 +260,6 @@ class BinaryTree {
         downLevel = getNodeLevelRecursive(node.right, value, level + 1);
         return downLevel;
     }
-
-    // Método para calcular a profundidade da árvore
     public int treeDepth() {
         return calculateTreeDepth(root);
     }

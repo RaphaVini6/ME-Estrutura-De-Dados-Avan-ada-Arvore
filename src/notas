@@ -1,3 +1,5 @@
+De inicio,esse codigo esta em formato unico para qualquer tipo de imprevisto q vinher acontecer...
+...Segundo...
 Ele implementa as funcionalidades mencionadas, permitindo:
 
 a) Obter o nível de um determinado nó através do método nivelNo(int valor).
@@ -56,23 +58,3 @@ Possui um atributo root que é um objeto da classe Node, representando o nó rai
 Os métodos públicos permitem operações na árvore, como adicionar um elemento, percorrer a árvore em diferentes ordens (pré-ordem, pós-ordem, em ordem), obter o nível e a profundidade de um nó, calcular a profundidade da árvore, a altura de um nó e imprimir a árvore com identação.
 A classe Node é uma classe interna privada que representa um nó da árvore binária. Cada nó possui um valor inteiro, uma referência para o nó filho esquerdo e uma referência para o nó filho direito.
 Em resumo, o código fornece uma implementação de uma árvore binária juntamente com um menu interativo que permite ao usuário realizar várias operações na árvore, como adicionar elementos, percorrer a árvore em diferentes ordens e obter informações sobre os nós e a estrutura da árvore.
-
-
-"""VISAO DE UMA IA"""
-
-Esse código Java implementa uma Árvore Binária e uma interface gráfica simples usando Swing. Aqui está uma explicação detalhada do código:
-
-A classe main tem o método main, onde é criada uma instância de BinaryTree e em seguida é mostrada uma interface gráfica (MenuFrame) usando o SwingUtilities.invokeLater.
-A classe MenuFrame estende JFrame e contém um menu suspenso (JComboBox) com opções relacionadas à manipulação da árvore binária. Ao selecionar uma opção e clicar no botão "Executar", a ação correspondente é executada.
-As ações disponíveis incluem adicionar um elemento à árvore, visualizar elementos em diferentes ordens (pré-ordem, pós-ordem, em ordem), verificar o nível e a profundidade de um nó, imprimir a árvore com indentação, e visualizar elementos em diferentes percursos (LRN, NLR, LNR).
-A classe BinaryTree implementa a estrutura da árvore binária. Ela possui métodos para adicionar elementos, realizar travessias da árvore para diálogo e para saída padrão, calcular nível e profundidade de um nó, calcular a profundidade da árvore, calcular a altura de um nó, e imprimir a árvore com indentação.
-A classe Node representa um nó na árvore binária, contendo um valor, uma referência para o nó à esquerda e uma referência para o nó à direita.
-Esse código demonstra a implementação de uma árvore binária e sua interação com uma interface gráfica básica para manipulação e visualização dos elementos da árvore.
-
-
-
-
-
-
-
-
